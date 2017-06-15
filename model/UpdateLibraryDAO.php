@@ -1,5 +1,5 @@
 <?php
-class User_libraryDAO {
+class UpdateLibraryDAO{
 	private $db;
 	
 	const INSERT_USER_LIBRARY_SQL = '
@@ -13,23 +13,26 @@ class User_libraryDAO {
 	}
 	public function insert_new_book($user_id, $book_info) {
 		
-		$autorId = $this->check_autor ( array (
-				$fName,
-				$lName 
-		) );
+		$fName = $book_info ['autor_Fname'];
+		$lName = $book_info ['autor_Lname'];
+		
+		$autorId = $this->check_autor ($fName, $lName);
 		
 		$pstmt = $this->db->prepare ( self::INSERT_USER_LIBRARY_SQL );
 		$pstmt->execute ( array (
-				$book_info ['isbn'],
-				$book_info ['title'],
-				$book_info ['desc'],
-				$book_info ['pubDate'],
-				$book_info ['cver'],
+				$book_info ['book_isbn'],
+				$book_info ['book_title'],
+				$book_info ['book_desc'],
+				$book_info ['book_pubDate'],
+				$book_info ['book_cover'],
 				$book_info ['book_res'],
-				$book_info ['pages'],
+				$book_info ['book_pages'],
 				$autorId,
 				$user_id 
 		) );
+		
+		return $pstmt;
+		
 	}
 	private function check_autor($fname, $lName) {
 		$pstmt = $this->db->prepare ( self::CHECK_IF_AUTOR_EXIST_SQL );
@@ -48,10 +51,10 @@ class User_libraryDAO {
 			) );
 			$autorID = $pstmt->fetch ();
 			
+			
+		} 
 			return $autorID;
-		} else {
-			return $autorID;
-		}
+		
 	}
 }
 ;
