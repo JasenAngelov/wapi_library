@@ -1,10 +1,12 @@
 <?php
+
 class UpdateLibraryDAO{
 	private $db;
 	
 	const INSERT_USER_LIBRARY_SQL = '
 			INSERT INTO library.books (ISBN, Book_Title, Description, Published, Cover_url, Book_url, Pages, Autor_Id, Uploader_Id) 
 			VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)';
+	
 	const CHECK_IF_AUTOR_EXIST_SQL = ' SELECT a.Id AS autor_id FROM library.autors a WHERE a.F_name =? AND a.L_name = ?';
 	const INSERT_NEW_AUTOR_AND_SELECT_NEW_ID_SQL = 'INSERT INTO library.autors (F_name, L_name )VALUES (? , ?); SELECT LAST_INSERT_ID();';
 	
@@ -56,5 +58,7 @@ class UpdateLibraryDAO{
 			return $autorID;
 		
 	}
-}
-;
+};
+
+
+?>
