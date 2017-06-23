@@ -7,7 +7,7 @@ class UpdateLibraryDAO{
 			INSERT INTO library.books (ISBN, Book_Title, Description, Published, Cover_url, Book_url, Pages, Autor_Id, Uploader_Id) 
 			VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)';
 	
-	const CHECK_IF_AUTOR_EXIST_SQL = ' SELECT a.Id AS autor_id FROM library.autors a WHERE a.F_name =? AND a.L_name = ?';
+	const CHECK_IF_AUTOR_EXIST_SQL = 'SELECT a.Id AS autor_id FROM library.autors a WHERE a.F_name =? AND a.L_name = ?';
 	const INSERT_NEW_AUTOR_AND_SELECT_NEW_ID_SQL = 'INSERT INTO library.autors (F_name, L_name )VALUES (? , ?); SELECT LAST_INSERT_ID();';
 	
 	public function __construct() {
@@ -20,6 +20,8 @@ class UpdateLibraryDAO{
 		
 		$autorId = $this->check_autor ($fName, $lName);
 		
+	
+		
 		$pstmt = $this->db->prepare ( self::INSERT_USER_LIBRARY_SQL );
 		$pstmt->execute ( array (
 				$book_info ['book_isbn'],
@@ -29,7 +31,7 @@ class UpdateLibraryDAO{
 				$book_info ['book_cover'],
 				$book_info ['book_res'],
 				$book_info ['book_pages'],
-				$autorId,
+				$autorId[0],
 				$user_id 
 		) );
 		
@@ -42,7 +44,8 @@ class UpdateLibraryDAO{
 				$fname,
 				$lName 
 		) );
-		$autorID = $pstmt->fetch ();
+		
+		$autorID = $pstmt->fetch();
 		
 		if (empty ( $autorID )) {
 			
@@ -51,7 +54,7 @@ class UpdateLibraryDAO{
 					$fname,
 					$lName 
 			) );
-			$autorID = $pstmt->fetch ();
+			$autorID = $pstmt->fetch();
 			
 			
 		} 

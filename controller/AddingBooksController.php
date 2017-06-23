@@ -1,9 +1,13 @@
 <?php
 session_set_cookie_params ( 1200 );
 session_start ();
+
 function __autoload($className) {
 	require_once '../model/' . $className . ".php";
 }
+
+
+
 
 try {
 	
@@ -76,15 +80,17 @@ try {
 				$book_info['book_res'] = $book_address;
 				$book_info['book_cover'] = $cover_address;
 				
-				$dao = new UpdateLibraryDAO();
-				$dao->insert_new_book($user_info->user_id, $book_info);
-				echo 'dada';
 				
+				
+				
+				$dao = new UpdateLibraryDAO();			
+				$dao->insert_new_book($user_info->user_id, $book_info);
+								
 				
 				if (!$dao) {
 					var_dump($book_info);
 					die();
-				}
+				};
 				
 				
 				if (! move_uploaded_file ( $_FILES ['book_cover'] ['tmp_name'], sprintf ( '../view/assets/images/user_pics/%s.%s', sha1_file ( $_FILES ['book_cover'] ['tmp_name'] ), $mime1 ) )) {
@@ -97,7 +103,7 @@ try {
 					throw new RuntimeException ( 'Failed to move uploaded file.' );
 				}				
 				
-				// =-=--=-=-=-=--==--==-=-=-=-=-=-=-=- END of Moving the uploaded file =--=--=-=--=-==-=-=--=-=-==-=--=\\
+				//=-=--=-=-=-=--==--==-=-=-=-=-=-=-=- END of Moving the uploaded file =--=--=-=--=-==-=-=--=-=-==-=--=\\
 				
 				
 				
@@ -105,13 +111,17 @@ try {
 				
 			}
 			
+		}else {
+			echo "Невалидни входни данни!";
 		}
+	}else {
+		echo "Моля влезте в профила си!";
 	}
 } catch ( RuntimeException $e ) {
 	
 	echo $e->getMessage ();
 }catch (PDOException $e){
-	var_dump($book_info);
+	var_dump($e);
 }
 
 ?>
