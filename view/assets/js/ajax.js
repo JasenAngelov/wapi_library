@@ -115,15 +115,15 @@ function addBookAJAX (){
   
     request.done(function (response){
           
-    	alert(response)
     	
-//    	var info = $.parseJSON(response)
-//		
-//    	
-//		inportLibraryFromAJAX(info[1]);
-//    	controlPanel(info[0]);
-//		
-//		document.location.hash = "My-library";
+    	
+    	var info = $.parseJSON(response)
+		
+  	
+		inportLibraryFromAJAX(info[1]);
+   		controlPanel(info[0]);
+		
+		document.location.hash = "My-library";
        
     });
     

@@ -87,21 +87,20 @@ try {
 				$dao->insert_new_book($user_info->user_id, $book_info);
 								
 				
-				if (!$dao) {
-					var_dump($book_info);
-					die();
+				if ($dao) {
+					if (! move_uploaded_file ( $_FILES ['book_cover'] ['tmp_name'], sprintf ( '../view/assets/images/user_pics/%s.%s', sha1_file ( $_FILES ['book_cover'] ['tmp_name'] ), $mime1 ) )) {
+						
+						throw new RuntimeException ( 'Failed to move uploaded file.' );
+					}
+					
+					if (! move_uploaded_file ( $_FILES ['book_res'] ['tmp_name'], sprintf ( '../view/assets/books/%s.%s', sha1_file ( $_FILES ['book_res'] ['tmp_name'] ), $mime2 ) )) {
+						
+						throw new RuntimeException ( 'Failed to move uploaded file.' );
+					}		
 				};
 				
 				
-				if (! move_uploaded_file ( $_FILES ['book_cover'] ['tmp_name'], sprintf ( '../view/assets/images/user_pics/%s.%s', sha1_file ( $_FILES ['book_cover'] ['tmp_name'] ), $mime1 ) )) {
-					
-					throw new RuntimeException ( 'Failed to move uploaded file.' );
-				}
-				
-				if (! move_uploaded_file ( $_FILES ['book_res'] ['tmp_name'], sprintf ( '../view/assets/books/%s.%s', sha1_file ( $_FILES ['book_res'] ['tmp_name'] ), $mime2 ) )) {
-					
-					throw new RuntimeException ( 'Failed to move uploaded file.' );
-				}				
+						
 				
 				//=-=--=-=-=-=--==--==-=-=-=-=-=-=-=- END of Moving the uploaded file =--=--=-=--=-==-=-=--=-=-==-=--=\\
 				

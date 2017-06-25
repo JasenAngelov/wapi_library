@@ -11,7 +11,7 @@
 </head>
 <body>
 	<div id="container">
-		<form id="form-1" class="login-form" action="#">
+		<form id="form-1" class="login-form" action="">
 			<div id="email_login">
 				<input id="username" type="text" placeholder="username" value="123" />
 			</div>
@@ -24,6 +24,7 @@
 			<p class="message">	Not registered? <a href="#" id="creation">Create an account</a>	</p>
 		</form>
 	</div>
+	<script type="text/javascript" src="./assets/js/returnToLibrary.js"></script>
 	<script type="text/javascript" src="./assets/js/fieldsCheck.js"></script>
 	<script type="text/javascript" src="./assets/js/fileCheck.js"></script>
 	<script type="text/javascript" src="./assets/js/dinamicContent.js"></script>

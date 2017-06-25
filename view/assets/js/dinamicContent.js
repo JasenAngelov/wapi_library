@@ -7,7 +7,7 @@ function addNewBook() {
 	
 	$( "body" ).empty()
 	
-	//=-=-=--=-=-=-=--=--==-=-=--=--=-= Creating the necessary DOM elements =-=-=-=--=-==--=-=-=-=-=--=--=-=-=-=\\
+	// =-=-=--=-=-=-=--=--==-=-=--=--=-= Creating the necessary DOM elements =-=-=-=--=-==--=-=-=-=-=--=--=-=-=-=\\
 	
 	var mainCont = $('<div class="container" ></div>');
 		
@@ -45,13 +45,13 @@ function addNewBook() {
 			
 		var bottom = $('<div class="bottom" ></div>');
 			
-			var back = $('<button id="backBut" class="button" >Back</button>');
+			var back = $('<button id="backBut" class="button" onclick="goBack()">Back</button>');
 			var subbmith = $('<button id="subBut" class="button" onclick="addBookAJAX()" >Subbmith</button>');
 	
-			//=-=-=--=-=-=-=--=--==-=-=--=--=-= END of Creating the necessary DOM elements =-=-=-=--=-==--=-=-=-=-=--=--=-=-=-=\\
+			// =-=-=--=-=-=-=--=--==-=-=--=--=-= END of Creating the necessary DOM elements =-=-=-=--=-==--=-=-=-=-=--=--=-=-=-=\\
 	
 			
-			//=-=--=-==-=-=-=---=-=-=-=-=-=-= Appending the elements to the Body ==-=-=--=-=--=-=--=-=-=-=-=-=-=--=-=-==-=-\\
+			// =-=--=-==-=-=-=---=-=-=-=-=-=-= Appending the elements to the Body ==-=-=--=-=--=-=--=-=-=-=-=-=-=--=-=-==-=-\\
 	header.appendTo(top);
 	top.appendTo(mainCont);
 	
@@ -80,12 +80,13 @@ function addNewBook() {
 	
 	mainCont.hide();
 	mainCont.appendTo("body").show('slow');
-			//=-=--=-==-=-=-=---=-=-=-=-=-=-= END of Appending the elements to the Body ==-=-=--=-=--=-=--=-=-=-=-=-=-=--=-=-==-=-\\
 	
+			// =-=--=-==-=-=-=---=-=-=-=-=-=-= END of Appending the elements to the Body ==-=-=--=-=--=-=--=-=-=-=-=-=-=--=-=-==-=-\\
+	window.location.hash = "#add-book";
 	
 	
 }
-				// =-=-=-=-=-=-=-=--=---=--==-=--=-----=--=- END of book interface  =-=-=--==-=--==-=--=-=-=--=-\\
+				// =-=-=-=-=-=-=-=--=---=--==-=--=-----=--=- END of book interface =-=-=--==-=--==-=--=-=-=--=-\\
 
 
 
@@ -94,7 +95,7 @@ function addNewBook() {
 
 
 
-//--------------------------------------------------------------------------------------------------------------------------------------------------------\\
+// --------------------------------------------------------------------------------------------------------------------------------------------------------\\
 
 			
 
@@ -105,10 +106,10 @@ function addNewBook() {
 
 
 
-//=-=-=-=--=-=--=-=--=-=-=--=--=-= Creating user control panel =--==-=-=-=-=--==-==-=--=-=\\
+// =-=-=-=--=-=--=-=--=-=-=--=--=-= Creating user control panel =--==-=-=-=-=--==-==-=--=-=\\
 
 function controlPanel(userInfo) {
-						// =-=-=--=-=-=--=-=--=-=--= Creating control panel elements  =-=-=--==-=-==--==--=-=--=-=\\
+						// =-=-=--=-=-=--=-=--=-=--= Creating control panel elements =-=-=--==-=-==--==--=-=--=-=\\
 	var container = $('<div class="control_panel" ></div>');
 	
 		var top = $('<div class="top" ></div>');
@@ -134,7 +135,7 @@ function controlPanel(userInfo) {
 		$('<a href="#">&laquo; Previus</a>').appendTo(pagination);		
 		
 			for (var i = 1; i <= userInfo.max_offset; i++) {
-					$('<a href="#">'+ i +'</a>').appendTo(pagination);
+					$('<a href="#" value="'+i+'">'+ i +'</a>').appendTo(pagination);
 				}
 			
 		$('<a href="#">Next &raquo;</a>').appendTo(pagination);
@@ -165,7 +166,7 @@ function controlPanel(userInfo) {
 
 
 
-//--------------------------------------------------------------------------------------------------------------------------------------------------------\\
+// --------------------------------------------------------------------------------------------------------------------------------------------------------\\
 
 
 
@@ -175,7 +176,7 @@ function controlPanel(userInfo) {
 
 
 
-					//=-=--=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-= Creating visualization for user library =-=-=-=--=-=-=--=-=--=-=--=-=--=-\\
+					// =-=--=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-= Creating visualization for user library =-=-=-=--=-=-=--=-=--=-=--=-=--=-\\
 
 function inportLibraryFromAJAX(response, offset = 0) {
 	$( "#container" ).empty()	
@@ -184,47 +185,58 @@ function inportLibraryFromAJAX(response, offset = 0) {
 	var books1 = $('<div class="books1" ></div>');	
 	var books2 = $('<div class="books2" ></div>');
 	
-	for (var i = 0; i < response.length; i++) {	
-	
-	var bookCont =	$('<div class="bookCont" ></div>');
-	var book = $('<div class="book" id="book'+ i +'"></div>');	
-	var download = $('<a href="'+response[i].location_url+'" download="'+response[i].title+'"></a>');	
-	var cover = $('<img src="./assets/images'+ response[i].cover +'"/>');
-	var describtion =  $('<div class="desc" ></div>');
-	var title = $('<p>Title: '+ '<strong>'+response[i].title +'</strong>'+'</p>');
-	var pubDate = $('<p>Pub. Date: '+ '<strong>'+response[i].published_date +'</strong>'+'</p>');
-	var isbn = $('<p>ISBN: '+ '<strong>'+response[i].isbn +'</strong>'+'</p>');
-	var pages = $('<p>Pages: '+ '<strong>'+response[i].pages +'</strong>'+'</p>');
-	var autor = $('<p>Autor: '+ '<strong>' +response[i].autor_Fname[0] +". "+response[i].autor_Lname+'</strong>'+'</p>');
-	
-	
-			// =-=-=--=-=-=--=-=--=-=--= Aappend DOM elements =-=-=--==-=-==--==--=-=--=-=\\
-	
-	isbn.appendTo(describtion);
-	title.appendTo(describtion);
-	pubDate.appendTo(describtion);
-	pages.appendTo(describtion);
-	autor.appendTo(describtion);	
-	cover.appendTo(download);
-	download.appendTo(book);
-	book.appendTo(bookCont);
-	describtion.appendTo(bookCont);	
-	if (i < 3) {
-		bookCont.hide();
-		bookCont.appendTo(books1).show('slow');
-	}else {
-		bookCont.hide();
-		bookCont.appendTo(books2).show('slow');
-	}	
-	books1.hide();
-	books1.appendTo(container).show('slow');
-	books2.hide();
-	books2.appendTo(container).show('slow');
+	if ($.isArray(response)){
+		
+		for (var i = 0; i < response.length; i++) {	
+		
+		var bookCont =	$('<div class="bookCont" ></div>');
+		var book = $('<div class="book" id="book'+ i +'"></div>');	
+		var download = $('<a href="'+response[i].location_url+'" download="'+response[i].title+'"></a>');	
+		var cover = $('<img src="'+ response[i].cover +'"/>');
+		var describtion =  $('<div class="desc" ></div>');
+		var title = $('<p>Title: '+ '<strong>'+response[i].title +'</strong>'+'</p>');
+		var pubDate = $('<p>Pub. Date: '+ '<strong>'+response[i].published_date +'</strong>'+'</p>');
+		var isbn = $('<p>ISBN: '+ '<strong>'+response[i].isbn +'</strong>'+'</p>');
+		var pages = $('<p>Pages: '+ '<strong>'+response[i].pages +'</strong>'+'</p>');
+		var autor = $('<p>Autor: '+ '<strong>' +response[i].autor_Fname[0] +". "+response[i].autor_Lname+'</strong>'+'</p>');
+		
+		
+				// =-=-=--=-=-=--=-=--=-=--= Aappend DOM elements =-=-=--==-=-==--==--=-=--=-=\\
+		
+		isbn.appendTo(describtion);
+		title.appendTo(describtion);
+		pubDate.appendTo(describtion);
+		pages.appendTo(describtion);
+		autor.appendTo(describtion);	
+		cover.appendTo(download);
+		download.appendTo(book);
+		book.appendTo(bookCont);
+		describtion.appendTo(bookCont);	
+		if (i < 3) {
+			bookCont.hide();
+			bookCont.appendTo(books1).show('slow');
+		}else {
+			bookCont.hide();
+			bookCont.appendTo(books2).show('slow');
+		}	
+		books1.hide();
+		books1.appendTo(container).show('slow');
+		books2.hide();
+		books2.appendTo(container).show('slow');
+		}
+	}else{  
+		var phpResponse = $('<p>'+'<strong>'+response+'</strong>'+'</p>');	 
+		phpResponse.hide();
+		phpResponse.appendTo(container).show('slow');
+		container.css("text-align", "center");
+		
 	}
+	
+	
 	container.hide();
 	container.appendTo("#container").show('slow');
 			
-			// =-=-=--=-=-=--=-=--=-=--= END of append  =-=-=--==-=-==--==--=-=--=-=\\
+			// =-=-=--=-=-=--=-=--=-=--= END of append =-=-=--==-=-==--==--=-=--=-=\\
 	
 };
 
