@@ -7,7 +7,7 @@ $("#login_button").click(function(event){
     
     event.preventDefault();
 
-    
+  
   
     var $form = $(this);
 
@@ -34,8 +34,11 @@ $("#login_button").click(function(event){
   
     request.done(function (response){
       
+    	  
+    	
     		var info = $.parseJSON(response)
-    		    		
+    		
+    		  		
     		inportLibraryFromAJAX(info[0]);
     		controlPanel(info[1]);
     		

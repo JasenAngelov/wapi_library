@@ -5,16 +5,21 @@ function __autoload($className) {
 	require_once '../model/' . $className . ".php";
 }
 
-if (isset ( $_SESSION ['is_loged'] ) && time () - $_SESSION ['is_loged'] < 1200) {
+if ( isset ( $_POST ['refresh'])) {	
 	
-	$_SESSION ['is_loged'] = time ();
-	
-	echo json_encode ( array($_SESSION ['user_library'], $_SESSION['User_info'] ));
-	
-	die ();
+	if (isset ( $_SESSION ['is_loged'] ) && time () - $_SESSION ['is_loged'] < 1200) {
+		
+		$_SESSION ['is_loged'] = time ();
+		
+		echo json_encode ( array (
+				$_SESSION ['user_library'],
+				$_SESSION ['User_info'] 
+		) );
+		
+		die ();
+	}
 }
 
-// unset($_SESSION);
 
 // -=-=-=-=-=-=-=--==-=-=-=-=-=-= Submith control validation =-=-=-=-=--=-=--=--=-=--=-=-=--=\\
 if (isset ( $_POST ['login_submission'] )) {
@@ -41,14 +46,12 @@ if (isset ( $_POST ['login_submission'] )) {
 			$dao = new User_libraryDAO ();
 			$user_library = $dao->get_user_library ( $user_account->user_id );
 			
+			$_SESSION ['user_library'] = $user_library;
 			
-			$_SESSION ['user_library'] = $user_library;			
-			
-			
-			
-			echo json_encode(array($_SESSION ['user_library'], $_SESSION ['User_info']));
-			
-			
+			echo json_encode ( array (
+					$_SESSION ['user_library'],
+					$_SESSION ['User_info'] 
+			) );
 			
 			// -=-=-=-=-=-=-=--==-=-=-=-=-=-= END of Retrieving client LIBRARY information =-=-=-=-=-=-=-=-=--=-=--=--=-=---=\\
 		} catch ( PDOException $e ) {

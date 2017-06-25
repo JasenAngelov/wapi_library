@@ -9,7 +9,7 @@ function addNewBook() {
 	
 	// =-=-=--=-=-=-=--=--==-=-=--=--=-= Creating the necessary DOM elements =-=-=-=--=-==--=-=-=-=-=--=--=-=-=-=\\
 	
-	var mainCont = $('<div class="container" ></div>');
+	var mainCont = $('<div class="container"></div>');
 		
 		var top = $('<div class="top" ></div>');
 			var header = $('<h1>Please fill out all fields correctly!</h1>');
@@ -120,7 +120,7 @@ function controlPanel(userInfo) {
 		var center = $('<div class="center" ></div>');
 		
 			var info = $('<div class="user_info" ></div>');
-			var search = $('<input type="text" name="search" placeholder="Search.." id="search">');
+			var search = $('<input type="text" name="search" placeholder="Search.." id="search" onkeypress="search(event)">');
 			
 		var bottom = $('<div class="bottom" ></div>');
 			
@@ -245,8 +245,64 @@ function inportLibraryFromAJAX(response, offset = 0) {
 
 
 
-
-
+function inportSearchLibraryFromAJAX(response, offset = 0) {
+	
+	$( "#form-1" ).empty()	
+	
+	var container = $("#form-1");
+	var books1 = $('<div class="books1" ></div>');	
+	var books2 = $('<div class="books2" ></div>');
+	
+	if ($.isArray(response)){
+		
+		for (var i = 0; i < response.length; i++) {	
+		
+		var bookCont =	$('<div class="bookCont" ></div>');
+		var book = $('<div class="book" id="book'+ i +'"></div>');	
+		var download = $('<a href="'+response[i].location_url+'" download="'+response[i].title+'"></a>');	
+		var cover = $('<img src="'+ response[i].cover +'"/>');
+		var describtion =  $('<div class="desc" ></div>');
+		var title = $('<p>Title: '+ '<strong>'+response[i].title +'</strong>'+'</p>');
+		var pubDate = $('<p>Pub. Date: '+ '<strong>'+response[i].published_date +'</strong>'+'</p>');
+		var isbn = $('<p>ISBN: '+ '<strong>'+response[i].isbn +'</strong>'+'</p>');
+		var pages = $('<p>Pages: '+ '<strong>'+response[i].pages +'</strong>'+'</p>');
+		var autor = $('<p>Autor: '+ '<strong>' +response[i].autor_Fname[0] +". "+response[i].autor_Lname+'</strong>'+'</p>');
+		
+		
+				// =-=-=--=-=-=--=-=--=-=--= Aappend DOM elements =-=-=--==-=-==--==--=-=--=-=\\
+		
+		isbn.appendTo(describtion);
+		title.appendTo(describtion);
+		pubDate.appendTo(describtion);
+		pages.appendTo(describtion);
+		autor.appendTo(describtion);	
+		cover.appendTo(download);
+		download.appendTo(book);
+		book.appendTo(bookCont);
+		describtion.appendTo(bookCont);	
+		if (i < 3) {
+			bookCont.hide();
+			bookCont.appendTo(books1).show('slow');
+		}else {
+			bookCont.hide();
+			bookCont.appendTo(books2).show('slow');
+		}	
+		books1.hide();
+		books1.appendTo(container).show('slow');
+		books2.hide();
+		books2.appendTo(container).show('slow');
+		}
+	}else{  
+		var phpResponse = $('<p>'+'<strong>'+response+'</strong>'+'</p>');	 
+		phpResponse.hide();
+		phpResponse.appendTo(container).show('slow');
+		
+		
+	}
+			
+			// =-=-=--=-=-=--=-=--=-=--= END of append =-=-=--==-=-==--==--=-=--=-=\\
+	
+}
 
 
 

@@ -24,12 +24,14 @@
 			<p class="message">	Not registered? <a href="#" id="creation">Create an account</a>	</p>
 		</form>
 	</div>
-	<script type="text/javascript" src="./assets/js/returnToLibrary.js"></script>
+	
 	<script type="text/javascript" src="./assets/js/fieldsCheck.js"></script>
 	<script type="text/javascript" src="./assets/js/fileCheck.js"></script>
 	<script type="text/javascript" src="./assets/js/dinamicContent.js"></script>
 	<script type="text/javascript" src="./assets/js/jquery.min.1.7.js"></script>	
 	<script type="text/javascript" src="./assets/js/ajax.js"></script>
 	<script type="text/javascript" src="./assets/js/modernizr.custom.js"></script>
+	<script type="text/javascript" src="./assets/js/search.js"></script>
+<!-- 	<script type="text/javascript" src="./assets/js/returnToLibrary.js"></script> -->
 </body>
 </html>
