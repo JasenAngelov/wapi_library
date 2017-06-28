@@ -130,15 +130,16 @@ function controlPanel(userInfo) {
 		
 					// =-=-=--=-=-=--=-=--=-=--= Create and append the inner HTML for the elements =-=-=--==-=-==--==--=-=--=-=\\
 		$('<img src="./assets/images/website/wapi_logo.png"/>').appendTo(logo);
-		$('<h1>Hello, '+userInfo.first_name +'</h1>').appendTo(info);
+		$('<h1>Hello, '+userInfo.first_name +'</h1>').appendTo(info);		
 		$('<p>+ Add Book</p>').appendTo(addBook);
-		$('<a href="#">&laquo; Previus</a>').appendTo(pagination);		
+		
+		$('<a  onclick="pagination(this)" id="-">&laquo; Previus</a>').appendTo(pagination);		
 		
 			for (var i = 1; i <= userInfo.max_offset; i++) {
-					$('<a href="#" value="'+i+'">'+ i +'</a>').appendTo(pagination);
+					$('<a  onclick="pagination(this)" id="'+i+'">'+ i +'</a>').appendTo(pagination);
 				}
 			
-		$('<a href="#">Next &raquo;</a>').appendTo(pagination);
+		$('<a  onclick="pagination(this)" id="+">Next &raquo;</a>').appendTo(pagination);
 		
 	
 		logo.appendTo(top);		

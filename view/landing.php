@@ -32,6 +32,7 @@
 	<script type="text/javascript" src="./assets/js/ajax.js"></script>
 	<script type="text/javascript" src="./assets/js/modernizr.custom.js"></script>
 	<script type="text/javascript" src="./assets/js/search.js"></script>
+	<script type="text/javascript" src="./assets/js/pagination.js"></script>
 <!-- 	<script type="text/javascript" src="./assets/js/returnToLibrary.js"></script> -->
 </body>
 </html>

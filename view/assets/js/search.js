@@ -21,15 +21,15 @@ function search(event) {
     	  
     	    request.done(function (response){
     	      
-    	    	  console.log(response)
-    	    	
-//    	    		var info = $.parseJSON(response)
-//    	    		
-//    	    		  		
-//    	    		inportSearchLibraryFromAJAX(info[0]);
-//    	    		
-//    	    		
-//    	    		document.location.hash = + "#search";
+//    	    	 console.log(response)
+  	    	
+ 	    		var info = $.parseJSON(response)
+   	    		
+   	    		  		
+   	    		inportSearchLibraryFromAJAX(info[0]);
+   	    		
+   	    		
+  	    		document.location.hash = + "#search";
     	       
     	    });
     	    

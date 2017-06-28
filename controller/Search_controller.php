@@ -12,11 +12,18 @@ if (isset($_SESSION['is_loged']) && time() - $_SESSION['is_loged'] < 1200 && iss
 	if (!empty ( $_POST ['search_input'] )) {
 		
 		// -=-=-=-=-=-=-=--==-=-=-=-=-=-= Sterilization of the client Input data =-=-=-=-=--=-=--=--=-=--=-=-=--=\\
-		$input = htmlentities(trim($_POST['search_submit']));
+		$input = htmlentities(trim($_POST['search_input']));
 		
 		$input = explode(' ', $input);
 		
 		$user_account = $_SESSION['User_info']; 
+		
+		if (isset($_POST['offset'])){
+			$offset = $_POST['offset'];
+		}else {
+			$offset = 0;
+		}
+		
 		
 		// -=-=-=-=-=-=-=--==-=-=-=-=-=-= END of Input data sterilization =-=-=-=-=-=-=-=-=--=-=--=--=-=--=-=-=--=\\
 		
@@ -26,9 +33,13 @@ if (isset($_SESSION['is_loged']) && time() - $_SESSION['is_loged'] < 1200 && iss
 			
 			
 				$dao = new User_libraryDAO();
-				$user_library = $dao->get_user_library($user_account->user_id, $offset);
+				$user_library = $dao->books_by_search($input, $user_account->user_id);
 						
-			
+				
+				
+				echo json_encode ( array (
+						$user_library
+				) );
 			// -=-=-=-=-=-=-=--==-=-=-=-=-=-= END of Retrieving client LIBRARY information =-=-=-=-=-=-=-=-=--=-=--=--=-=---=\\
 			
 			

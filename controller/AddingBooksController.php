@@ -1,13 +1,9 @@
 <?php
 session_set_cookie_params ( 1200 );
 session_start ();
-
 function __autoload($className) {
 	require_once '../model/' . $className . ".php";
 }
-
-
-
 
 try {
 	
@@ -20,7 +16,7 @@ try {
 			$book_info = array ();
 			
 			foreach ( $_POST as $key => $value ) {
-				$book_info [$key] =  htmlentities ( trim ( $value ) );
+				$book_info [$key] = htmlentities ( trim ( $value ) );
 			}
 			
 			if (! isset ( $_FILES ['book_res'] ['error'] ) || is_array ( $_FILES ['book_res'] ['error'] ) || ! isset ( $_FILES ['book_res'] ['error'] ) || is_array ( $_FILES ['book_res'] ['error'] )) {
@@ -70,22 +66,18 @@ try {
 				// =-=-=-=-=-=-=-=--=-=--=-=-=-=-=-==- END of checkong the MIME type =-=-=-=-=-=---=-=-=-=--==-\\
 				
 				// =-=--=-=-=-=--==--==-=-=-=-=-=-=-=- Moving the uploaded file =--=--=-=--=-==-=-=--=-=-==-=--=\\
-				$hash_file_name =  sha1_file ( $_FILES ['book_res'] ['tmp_name'] );
-				$book_address = sprintf ( '../view/assets/books/%s.%s', $hash_file_name, $mime2 );
+				$hash_file_name = sha1_file ( $_FILES ['book_res'] ['tmp_name'] );
+				$book_address = sprintf ( './assets/books/%s.%s', $hash_file_name, $mime2 );
 				
-				$hash_file_name =  sha1_file ( $_FILES ['book_cover'] ['tmp_name'] );
-				$cover_address = sprintf ( '../view/assets/images/user_pics/%s.%s', $hash_file_name, $mime2 );
+				$hash_file_name = sha1_file ( $_FILES ['book_cover'] ['tmp_name'] );
+				$cover_address = sprintf ( './assets/images/user_pics/%s.%s', $hash_file_name, $mime1 );
 				
 				$user_info = $_SESSION ['User_info'];
-				$book_info['book_res'] = $book_address;
-				$book_info['book_cover'] = $cover_address;
+				$book_info ['book_res'] = $book_address;
+				$book_info ['book_cover'] = $cover_address;
 				
-				
-				
-				
-				$dao = new UpdateLibraryDAO();			
-				$dao->insert_new_book($user_info->user_id, $book_info);
-								
+				$dao = new UpdateLibraryDAO ();
+				$dao->insert_new_book ( $user_info->user_id, $book_info );
 				
 				if ($dao) {
 					if (! move_uploaded_file ( $_FILES ['book_cover'] ['tmp_name'], sprintf ( '../view/assets/images/user_pics/%s.%s', sha1_file ( $_FILES ['book_cover'] ['tmp_name'] ), $mime1 ) )) {
@@ -96,31 +88,23 @@ try {
 					if (! move_uploaded_file ( $_FILES ['book_res'] ['tmp_name'], sprintf ( '../view/assets/books/%s.%s', sha1_file ( $_FILES ['book_res'] ['tmp_name'] ), $mime2 ) )) {
 						
 						throw new RuntimeException ( 'Failed to move uploaded file.' );
-					}		
-				};
+					}
+				}
+				;
 				
-				
-						
-				
-				//=-=--=-=-=-=--==--==-=-=-=-=-=-=-=- END of Moving the uploaded file =--=--=-=--=-==-=-=--=-=-==-=--=\\
-				
-				
-				
-				var_dump($book_info);
-				
+				// =-=--=-=-=-=--==--==-=-=-=-=-=-=-=- END of Moving the uploaded file =--=--=-=--=-==-=-=--=-=-==-=--=\\
 			}
-			
-		}else {
+		} else {
 			echo "Невалидни входни данни!";
 		}
-	}else {
+	} else {
 		echo "Моля влезте в профила си!";
 	}
 } catch ( RuntimeException $e ) {
 	
 	echo $e->getMessage ();
-}catch (PDOException $e){
-	var_dump($e);
+} catch ( PDOException $e ) {
+	var_dump ( $e );
 }
 
 ?>

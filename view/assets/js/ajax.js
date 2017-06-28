@@ -94,6 +94,7 @@ function addBookAJAX (){
     
     formData.append('book_res', book_data);
 	formData.append('book_cover', cover_data);	
+	
 	for ( var key in serializedData ) {
 		formData.append(key, serializedData[key]);
 	}
@@ -118,15 +119,14 @@ function addBookAJAX (){
   
     request.done(function (response){
           
+    		
     	
-    	
-    	var info = $.parseJSON(response)
-		
+    	console.log(response)
   	
-		inportLibraryFromAJAX(info[1]);
-   		controlPanel(info[0]);
-		
-		document.location.hash = "My-library";
+//		inportLibraryFromAJAX(info[1]);
+//   		controlPanel(info[0]);
+//		
+//		document.location.hash = "My-library";
        
     });
     

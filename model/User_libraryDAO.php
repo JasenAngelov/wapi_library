@@ -11,7 +11,7 @@ class User_libraryDAO {
 	const GET_USER_BOOKS_BY_SEARCH_SQL = ' SELECT B.ISBN AS isbn, B.Book_Title AS title, B.Description AS description, B.Published AS published_date, B.Cover_url AS cover, B.Book_url AS location_url,
 					B.Pages AS pages, A.F_name AS autor_Fname, A.L_name AS autor_Lname 
 	FROM library.books B JOIN library.autors A ON B.Autor_Id = A.Id 
-    WHERE b.ISBN = :isbn  OR a.F_name LIKE :fname OR a.L_name LIKE :lname AND b.Uploader_Id :upId LIMIT 6 OFFSET :offset';
+    WHERE b.Book_Title LIKE :title  OR a.F_name LIKE :fname OR a.L_name LIKE :lname AND b.Uploader_Id = :upId  LIMIT 6 OFFSET :offset';
 	
 	public function __construct() {
 		$this->db = DBConnection::getDb ();
@@ -32,32 +32,33 @@ class User_libraryDAO {
 		}
 	}
 	
-	public function books_by_search($data, $userId, $offset = 0) {
-		$offset_num = $offset + 0;
+	public function books_by_search($data, $userId) {
+				
+		$offset = 0;
 		
 		if (count ( $data ) <= 3) {
 			switch (count ( $data )) {
 				case 1 :
-					$isbn = '%' . $data [0] . '%';
+					$title =  '%' . $data [0] . '%';
 					$fname = '%' . $data [0] . '%';
 					$lname = '%' . $data [0] . '%';
 					break;
 					
 				case 2 :
-					$isbn = '';
+					$title= '';
 					$fname = '%' . $data [0] . '%';
 					$lname = '%' . $data [1] . '%';
 					break;
 					
 				case 3 :
-					$isbn = '%' . $data [0] . '%';
+					$title=  '%' . $data [0] . '%';
 					$fname = '%' . $data [1] . '%';
 					$lname = '%' . $data [2] . '%';
 					break;
 			}
 		}
 		
-		$books = $this->user_serch_query ( $isbn, $fname, $lname, $offset_num, $userId, self::GET_USER_BOOKS_BY_SEARCH_SQL);
+		$books = $this->user_serch_query ( $title, $fname, $lname, $userId, $offset, self::GET_USER_BOOKS_BY_SEARCH_SQL);
 		
 		if (! empty ( $books )) {
 			foreach ( $books as $book ) {
@@ -65,7 +66,7 @@ class User_libraryDAO {
 			}
 			return $result;
 		} else {
-			return 'Няма намерени резултати!';
+			return "Няма намерени резултати!";
 		}
 	}
 	
@@ -79,14 +80,14 @@ class User_libraryDAO {
 		return $books;
 	}
 	
-	private function user_serch_query($isbn, $fname, $lname, $offset, $userId, $statement) {
+	private function user_serch_query($title, $fname, $lname, $userId, $offset, $statement) {
 		$pstmt = $this->db->prepare ( $statement );
-		$pstmt->bindValue ( ':isbn', $isbn, PDO::PARAM_INT );
-		$pstmt->bindValue ( ':fname', $fname, PDO::PARAM_STR );
+		$pstmt->bindValue ( ':title', $title, PDO::PARAM_STR);
+		$pstmt->bindValue ( ':fname', $fname, PDO::PARAM_STR);
 		$pstmt->bindValue ( ':lname', $lname, PDO::PARAM_STR );
-		$pstmt->bindValue ( ':offset', $offset, PDO::PARAM_INT );
-		$pstmt->bindValue ( ':upId', $userId, PDO::PARAM_INT );
-		$pstmt->execute ();
+		$pstmt->bindValue ( ':offset', $offset, PDO::PARAM_STR);
+		$pstmt->bindValue ( ':upId', $userId, PDO::PARAM_STR);
+		$pstmt->execute (array($title, $fname, $lname, $userId));
 		
 		$books = $pstmt->fetchAll ( PDO::FETCH_ASSOC );
 		return $books;
