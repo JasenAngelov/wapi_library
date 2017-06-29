@@ -18,14 +18,21 @@ function chekingURL() {
 			addNewBook();
 			break;
 			
-		case '#signUp':	
-			
+		case '#signUp':				
 			createUserPanel();
+			
+			$('#backBut').click(function(event){
+			    event.preventDefault();
+			});
+			
 			break;
 			
-		case '#logIn':	
-			
+		case '#logIn':				
 			LogInMenu()
+			$('#login_button').click(function(event){
+			    event.preventDefault();
+			});
+			
 			break;			
 		}
 	}
@@ -34,7 +41,8 @@ function chekingURL() {
 
 $(document).ready(chekingURL())
 
-window.onhashchange = function() {
-	
+window.onhashchange = function() {	
 	chekingURL()
 }
+
+

@@ -317,7 +317,7 @@ function createUserPanel() {
 	
 	//=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-= Creating elements =-=-=-=-=-=-=--=-=-=-=-==-=-=\\
 	
-	var form = $('<form id="form-2" enctype="multipart/form-data"></form>')
+	var form = $('<form id="form-2" ></form>')
 		var header = $('<h1>Sign Up</h1>')
 		
 		var fieldset = $('<fieldset></fieldset>')			
