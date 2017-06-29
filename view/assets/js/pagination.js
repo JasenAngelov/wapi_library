@@ -10,28 +10,24 @@ function pagination(element) {
 	
 		
 		switch (value) {	
-		case '-':
-			console.log('minus')
-			window.location.hash = "#-1"
+		case '-':			
+			var offset = "prev"
 			break;
 		case '+':
-			console.log('plus')
-			window.location.hash = "&+1"
+			var offset = "next"
 			break;
 		
 		default:
 			console.log(value)
-			window.location.hash = "&"+value+""
+			var offset = value
 			break;
 		}
 	
-	
-	    if(window.location.hash.contains('?')) {
-	        var url = window.location.hash+"&success=yes";
-	    }else{
-	        var url = window.location.hash+"?success=yes";
-	    }
-	    window.location.hash = url;
+		var url = 	window.location.hash
+		var new_url = url.substring(0, url.indexOf('?'));
+	 
+	        url = new_url+"?offset=" + offset;	   
+	        window.location.hash = url;
 	  
 		
 	

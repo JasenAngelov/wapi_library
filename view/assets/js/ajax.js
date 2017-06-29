@@ -1,9 +1,7 @@
 
 //=--=-=-=-=-=--=-=--=-=-=-=-==-=-=-=-=-=-=-==-=- AJAX request for logIn =-=--=-=-=-=-=--=-=-=-=-=-=-==-=-=-=---=-=-\\
 
-$("#login_button").click(function(event){
-	
-	
+$("#login_button").click(function(event){	
     
     event.preventDefault();
 
@@ -31,18 +29,19 @@ $("#login_button").click(function(event){
         data: serializedData
     });
 
-  
+    
     request.done(function (response){
-      
     	  
+		
     	
-    		var info = $.parseJSON(response)
-    		
+    		var info = $.parseJSON(response)    		
     		  		
     		inportLibraryFromAJAX(info[0]);
     		controlPanel(info[1]);
     		
-    		document.location.hash = "My-library";
+//    		url = window.location.hash = 'My-library';
+    		
+ 			
        
     });
     
@@ -126,7 +125,7 @@ function addBookAJAX (){
 //		inportLibraryFromAJAX(info[1]);
 //   		controlPanel(info[0]);
 //		
-//		document.location.hash = "My-library";
+//		document.location.hash = "/My-library";
        
     });
     

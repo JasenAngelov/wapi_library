@@ -1,6 +1,4 @@
-function goBack() {
-
-	
+function myLibrary() {	
 	
 	 var serializedData = {
 			 refresh : true,	    		
@@ -15,16 +13,14 @@ function goBack() {
 	 
 	
 	  
-	    request.done(function (response){
-	        	
+	    request.done(function (response){	        	
+	    	
 	    	
 	    		var info = $.parseJSON(response)
-	    			    		
+	    			    			    		
 	    		inportLibraryFromAJAX(info[0]);
-	    		controlPanel(info[1]);
-	    		
-	    		document.location.hash = "My-library";
-	       
+	    		controlPanel(info[1]);	    		
+	    			       
 	    });
 	    
 	   

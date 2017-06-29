@@ -5,13 +5,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sign Up Form</title>
-<link rel="stylesheet" href="./assets/css/normalize.css">
+<link rel="text/html" href="./assets/css/normalize.css">
 <link href='http://fonts.googleapis.com/css?family=Nunito:400,300' rel='stylesheet' type='text/css'>
 <link rel="stylesheet" href="./assets/css/main.css">
 </head>
 <body>
 	<div id="container">
-		<form id="form-1" class="login-form" action="">
+		<form id="form-1" class="login-form" >
 			<div id="email_login">
 				<input id="username" type="text" placeholder="username" value="123" />
 			</div>
@@ -21,7 +21,7 @@
 
 			</div>
 			<button id="login_button" name="login_button" type="submit">login</button>
-			<p class="message">	Not registered? <a href="#" id="creation">Create an account</a>	</p>
+			<p class="message">	Not registered? <a id="creation" onclick = "goTo('signUp')">Create an account</a>	</p>
 		</form>
 	</div>
 	
@@ -32,7 +32,11 @@
 	<script type="text/javascript" src="./assets/js/ajax.js"></script>
 	<script type="text/javascript" src="./assets/js/modernizr.custom.js"></script>
 	<script type="text/javascript" src="./assets/js/search.js"></script>
-	<script type="text/javascript" src="./assets/js/pagination.js"></script>
-<!-- 	<script type="text/javascript" src="./assets/js/returnToLibrary.js"></script> -->
+	<script type="text/javascript" src="./assets/js/pagination.js"></script>	
+	<script type="text/javascript" src="./assets/js/goToButton.js"></script>
+	<script type="text/javascript" src="./assets/js/returnToLibrary.js"></script>
+	<script type="text/javascript" src="./assets/js/urllistener.js"></script>
+	
+
 </body>
 </html>

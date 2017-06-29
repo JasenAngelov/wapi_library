@@ -5,7 +5,7 @@
 					// =-=-=-=-=-=-=-=--=---=--==-=--=-----=--=- Add new book interface =-=-=--==-=--==-=--=-=-=--=-\\
 function addNewBook() {
 	
-	$( "body" ).empty()
+	$( "#container" ).empty()
 	
 	// =-=-=--=-=-=-=--=--==-=-=--=--=-= Creating the necessary DOM elements =-=-=-=--=-==--=-=-=-=-=--=--=-=-=-=\\
 	
@@ -45,7 +45,7 @@ function addNewBook() {
 			
 		var bottom = $('<div class="bottom" ></div>');
 			
-			var back = $('<button id="backBut" class="button" onclick="goBack()">Back</button>');
+			var back = $('<button id="backBut" class="button" onclick="goTo(\'My-library\')">Back</button>');
 			var subbmith = $('<button id="subBut" class="button" onclick="addBookAJAX()" >Subbmith</button>');
 	
 			// =-=-=--=-=-=-=--=--==-=-=--=--=-= END of Creating the necessary DOM elements =-=-=-=--=-==--=-=-=-=-=--=--=-=-=-=\\
@@ -79,10 +79,10 @@ function addNewBook() {
 	bottom.appendTo(mainCont);	
 	
 	mainCont.hide();
-	mainCont.appendTo("body").show('slow');
+	mainCont.appendTo("#container").show('slow');
 	
 			// =-=--=-==-=-=-=---=-=-=-=-=-=-= END of Appending the elements to the Body ==-=-=--=-=--=-=--=-=-=-=-=-=-=--=-=-==-=-\\
-	window.location.hash = "#add-book";
+	window.location.hash = "add-book";
 	
 	
 }
@@ -115,7 +115,7 @@ function controlPanel(userInfo) {
 		var top = $('<div class="top" ></div>');
 	
 			var logo = $('<div class="logo" ></div>');						
-			var addBook = $('<div class="button" onclick = "addNewBook()"></div>');
+			var addBook = $('<div class="button" onclick="goTo(\'add-book\')" ></div>');
 			
 		var center = $('<div class="center" ></div>');
 		
@@ -130,7 +130,7 @@ function controlPanel(userInfo) {
 		
 					// =-=-=--=-=-=--=-=--=-=--= Create and append the inner HTML for the elements =-=-=--==-=-==--==--=-=--=-=\\
 		$('<img src="./assets/images/website/wapi_logo.png"/>').appendTo(logo);
-		$('<h1>Hello, '+userInfo.first_name +'</h1>').appendTo(info);		
+		$('<h1>Hello '+userInfo.first_name +'!</h1>').appendTo(info);		
 		$('<p>+ Add Book</p>').appendTo(addBook);
 		
 		$('<a  onclick="pagination(this)" id="-">&laquo; Previus</a>').appendTo(pagination);		
@@ -246,6 +246,8 @@ function inportLibraryFromAJAX(response, offset = 0) {
 
 
 
+
+
 function inportSearchLibraryFromAJAX(response, offset = 0) {
 	
 	$( "#form-1" ).empty()	
@@ -310,6 +312,56 @@ function inportSearchLibraryFromAJAX(response, offset = 0) {
 
 
 
-
+function createUserPanel() {
+	$('#container').empty()
+	
+	//=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-= Creating elements =-=-=-=-=-=-=--=-=-=-=-==-=-=\\
+	
+	var form = $('<form id="form-2" enctype="multipart/form-data"></form>')
+		var header = $('<h1>Sign Up</h1>')
+		
+		var fieldset = $('<fieldset></fieldset>')			
+			var legend = $('<legend>'+'<span class="number">*</span>Your basic info'+'</legend>')
+			
+			var fname_label = $('<label for="name">First name:</label> ')
+			var fname_inp = $('<input type="text" id="fname" name="f_name"> ')
+			
+			var lname_label = $('<label for="name">Last name:</label> ')
+			var lname_inp = $('<input type="text" id="lname" name="l_name"> ')
+			
+			var email_label = $('<label for="name">E-mail:</label> ')
+			var email_inp = $('<input type="text" id="email" name="email"> ')
+			
+			var pass_label = $('<label for="name">Password:</label> ')
+			var pass_inp = $('<input type="password" id="pass" name="pass"> ')
+			
+			var rePass_label = $('<label for="name">Repeate password:</label> ')
+			var rePass_inp = $('<input type="password" id="rePass" name="rePass"> ')
+			
+		var back = $('<button id="backBut" class="button" onclick="goTo(\'logIn\')">Back</button>');
+		var subbmith = $('<button id="subBut" class="button" onclick="createUserAJAX()" >Subbmith</button>');
+		
+		//=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-= END of Creating elements =-=-=-=-=-=-=--=-=-=-=-==-=-=\\
+		
+		//=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-= Appending elements =-=-=-=-=-=-=--=-=-=-=-==-=-=\\
+	
+	legend.appendTo(fieldset)
+	fname_label.appendTo(fieldset)
+	fname_inp.appendTo(fieldset)
+	lname_label.appendTo(fieldset)
+	lname_inp.appendTo(fieldset)
+	email_label.appendTo(fieldset)
+	email_inp.appendTo(fieldset)
+	pass_label.appendTo(fieldset)
+	pass_inp.appendTo(fieldset)
+	rePass_label.appendTo(fieldset)
+	rePass_inp.appendTo(fieldset)
+	header.appendTo(form)
+	fieldset.appendTo(form)
+	back.appendTo(form)
+	subbmith.appendTo(form)
+	form.hide()
+	form.appendTo('#container').show('slow');
+}
 
 
