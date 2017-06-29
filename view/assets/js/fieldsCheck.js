@@ -1,5 +1,5 @@
 // -=-=--==--=-=-=--==--=-=-=LogIn E-mail verification-=-=--==-=-=-=-=-==-=--==--= \\
-document.getElementById('username').onblur = function() {
+ function fieldCheck(element) {
 	
 	function validateEmail(email) {
 	    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -7,8 +7,8 @@ document.getElementById('username').onblur = function() {
 	    return result;
 	};
 	
-	var mailbox = document.getElementById('username');
-	var email = document.getElementById('username').value;
+	var mailbox = element;
+	var email = element.value;
 	var test = validateEmail(email);
 	if (test === false) {		
 		mailbox.style.border = 'solid 1px red'
@@ -18,7 +18,7 @@ document.getElementById('username').onblur = function() {
 			warning.style.color = 'red';
 			warning.style.fontSize = 11 +'px'			
 			warning.id = 'email-warning'
-			var element = document.getElementById('username');
+			
 			element.parentNode.insertBefore(warning, element);
 		}
 	}else{

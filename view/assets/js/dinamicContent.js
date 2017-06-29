@@ -365,3 +365,60 @@ function createUserPanel() {
 }
 
 
+
+
+
+
+
+
+
+function LogInMenu() {
+	$('#container').empty()
+	
+	//=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-= Creating elements =-=-=-=-=-=-=--=-=-=-=-==-=-=\\
+	
+	var form = $('<form id="form-1" class="login-form" enctype="multipart/form-data"></form>')
+		var divEmail = $('<div id="email_login">'+'<input id="username" type="text" placeholder="username" value="123"  onblur="fieldCheck(this)"/>'+'</div>')
+		
+		var divPass = $('<div id="pass_login">'+'<input id="password_login" type="password" placeholder="password" value="123" />'+'</div>')			
+			
+		var button = $('<button id="login_button" name="login_button" type="submit" onclick="logInAJAX()">login</button>')
+			
+		var register = $('<p class="message">Not registered? ' +'<span  id="creation" onclick = "goTo(\'signUp\')">Create an account</span>'+'</p>')
+			
+		
+		//=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-= END of Creating elements =-=-=-=-=-=-=--=-=-=-=-==-=-=\\
+		
+		//=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-= Appending elements =-=-=-=-=-=-=--=-=-=-=-==-=-=\\
+	
+	divEmail.appendTo(form)
+	divPass.appendTo(form)
+	button.appendTo(form)
+	register.appendTo(form)
+	
+	form.hide()
+	form.appendTo('#container').show('slow');
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

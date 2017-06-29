@@ -7,6 +7,7 @@ function chekingURL() {
 		url = window.location.hash = 'logIn';
 	}else{
 		switch (window.location.hash) {
+		
 		case '#My-library':
 			
 			myLibrary();			
@@ -22,8 +23,10 @@ function chekingURL() {
 			createUserPanel();
 			break;
 			
-		default:
-			break;
+		case '#logIn':	
+			
+			LogInMenu()
+			break;			
 		}
 	}
 }

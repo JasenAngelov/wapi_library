@@ -10,20 +10,7 @@
 <link rel="stylesheet" href="./assets/css/main.css">
 </head>
 <body>
-	<div id="container">
-		<form id="form-1" class="login-form" >
-			<div id="email_login">
-				<input id="username" type="text" placeholder="username" value="123" />
-			</div>
-			<div id="pass_login">
-				<input id="password_login" type="password" placeholder="password"
-					value="123" />
-
-			</div>
-			<button id="login_button" name="login_button" type="submit">login</button>
-			<p class="message">	Not registered? <a id="creation" onclick = "goTo('signUp')">Create an account</a>	</p>
-		</form>
-	</div>
+	<div id="container"></div>
 	
 	<script type="text/javascript" src="./assets/js/fieldsCheck.js"></script>
 	<script type="text/javascript" src="./assets/js/fileCheck.js"></script>

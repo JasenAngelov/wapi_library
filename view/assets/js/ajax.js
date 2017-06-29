@@ -1,11 +1,9 @@
 
 //=--=-=-=-=-=--=-=--=-=-=-=-==-=-=-=-=-=-=-==-=- AJAX request for logIn =-=--=-=-=-=-=--=-=-=-=-=-=-==-=-=-=---=-=-\\
 
-$("#login_button").click(function(event){	
+function logInAJAX(){	
     
-    event.preventDefault();
-
-  
+     
   
     var $form = $(this);
 
@@ -60,7 +58,7 @@ $("#login_button").click(function(event){
         $inputs.prop("disabled", false);
     });
 
-});
+};
 
 //=--=-=-=-=-=--=-=--=-=-=-=-==-=-=-=-=-=-=-==-=- END of AJAX request for logIn =-=--=-=-=-=-=--=-=-=-=-=-=-==-=-=-=---=-=-\\
 
@@ -149,6 +147,59 @@ function addBookAJAX (){
 //=--=-=-=-=-=--=-=--=-=-=-=-==-=-=-=-=-=-=-==-=- END of AJAX request for adding book =-=--=-=-=-=-=--=-=-=-=-=-=-==-=-=-=---=-=-\\
 
 
+function createUserAJAX() {
+      
+    event.preventDefault();  
+    
+    var $form = $(this);
 
+   
+    var $inputs = $form.find("input");
+
+   
+    var serializedData = {
+    		create_user : true,    		
+    		user_fname : $('#fname').val(),
+    		user_lname : $('#lname').val(),
+    		user_email : $('#email').val(),    		
+    		user_pass : $('#pass').val(),
+    		user_rePass : $('#rePass').val()
+    }
+
+    
+    $inputs.prop("disabled", true);
+
+    
+    request = $.ajax({
+        url: "../controller/CreateUserController.php",
+        type: "post",
+        data: serializedData
+    });
+
+    
+    request.done(function (response){
+    	
+    	alert(response)
+		       
+    });
+    
+   
+    request.fail(function (jqXHR, textStatus, errorThrown){
+        
+        console.error(
+            "The following error occurred: "+
+            textStatus, errorThrown
+        );
+    });
+
+  
+    request.always(function () {
+        
+        $inputs.prop("disabled", false);
+    });
+
+    
+    
+}
 
 

@@ -1,8 +1,8 @@
 <?php
-class LoginDAO {
+class CreateUserDAO {
 	private $db;
 	
-	const CREATE_USER_SQL = 'INSERT INTO library.users u (u.F_name, u.L_name, u.Email, u.Pass) VALUES(?, ?, ?, ?)';
+	const CREATE_USER_SQL = 'INSERT INTO library.users  (F_name, L_name, Email, Pass) VALUES(?, ?, ?, ?)';
 	
 	
 	public function __construct() {
