@@ -31,6 +31,12 @@ function errorHandler(errorCode) {
 			message = 'Грешно име или парола!'
 			failReport(message)
 			break;
+			
+	case 409:
+		goTo('errorLog')
+		message = 'Съществуващ E-mail!'
+		failReport(message)
+		break;
 	default:
 			goTo('errorLog')
 			message = 'Възникна грешка, моля опитайте по-късно!'

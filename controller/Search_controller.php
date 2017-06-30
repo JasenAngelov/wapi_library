@@ -1,16 +1,23 @@
 <?php
+
+/* 
+ 	Контрлолер за заявки за библиотека по "Ключови думи".	
+	Контролерът валидира и санитизира входните данни.  
+	
+ */
+
 session_set_cookie_params ( 1200 );
 session_start ();
 function __autoload($className) {
 	require_once '../model/' . $className . ".php";
 }
 $error = 200;
-// -=-=-=-=-=-=-=--==-=-=-=-=-=-= Submith control validation =-=-=-=-=--=-=--=--=-=--=-=-=--=\\
+// -=-=-=-=-=-=-=--==-=-=-=-=-=-= Валидиране на заявката =-=-=-=-=--=-=--=--=-=--=-=-=--=\\
 
 if (isset ( $_SESSION ['is_loged'] ) && time () - $_SESSION ['is_loged'] < 1200 && isset ( $_POST ['search_submit'] )) {
 	if (! empty ( $_POST ['search_input'] )) {
 		
-		// -=-=-=-=-=-=-=--==-=-=-=-=-=-= Sterilization of the client Input data =-=-=-=-=--=-=--=--=-=--=-=-=--=\\
+		// -=-=-=-=-=-=-=--==-=-=-=-=-=-= Санитизиране на данните =-=-=-=-=--=-=--=--=-=--=-=-=--=\\
 		$input = htmlentities ( trim ( $_POST ['search_input'] ) );
 		
 		$input = explode ( ' ', $input );
@@ -23,11 +30,11 @@ if (isset ( $_SESSION ['is_loged'] ) && time () - $_SESSION ['is_loged'] < 1200 
 			$offset = 0;
 		}
 		
-		// -=-=-=-=-=-=-=--==-=-=-=-=-=-= END of Input data sterilization =-=-=-=-=-=-=-=-=--=-=--=--=-=--=-=-=--=\\
+		// -=-=-=-=-=-=-=--==-=-=-=-=-=-= Край на санитизирането =-=-=-=-=-=-=-=-=--=-=--=--=-=--=-=-=--=\\
 		
 		try {
 			
-			// -=-=-=-=-=-=-=--==-=-=-=-=-=-= Retrieving client LIBRARY information =-=-=-=-=-=-=-=-=--=-=--=--=-=--=-=-=--=\\
+			// -=-=-=-=-=-=-=--==-=-=-=-=-=-= Извличане на информация от DB =-=-=-=-=-=-=-=-=--=-=--=--=-=--=-=-=--=\\
 			
 			$dao = new User_libraryDAO ();
 			$user_library = $dao->books_by_search ( $input, $user_account->user_id );
@@ -36,13 +43,14 @@ if (isset ( $_SESSION ['is_loged'] ) && time () - $_SESSION ['is_loged'] < 1200 
 					$error,
 					$user_library 
 			) );
-			// -=-=-=-=-=-=-=--==-=-=-=-=-=-= END of Retrieving client LIBRARY information =-=-=-=-=-=-=-=-=--=-=--=--=-=---=\\
 		} catch ( PDOException $e ) {
-			$error =  422;
+			$error = 422;
 			echo json_encode ( array (
 					$error 
 			) );
 		}
+		
+		// -=-=-=-=-=-=-=--==-=-=-=-=-=-= Край на извличането =-=-=-=-=-=-=-=-=--=-=--=--=-=---=\\
 	} else {
 		echo json_encode ( array (
 				$error,
@@ -50,11 +58,11 @@ if (isset ( $_SESSION ['is_loged'] ) && time () - $_SESSION ['is_loged'] < 1200 
 		) );
 	}
 } else {
-	$error =  401;
+	$error = 401;
 	echo json_encode ( array (
 			$error 
 	) );
 }
-// -=-=-=-=-=-=-=--==-=-=-=-=-=-= END of submith control validation =-=-=-=-=--=-=--=--=-=--=-=-=--=\\
+			// -=-=-=-=-=-=-=--==-=-=-=-=-=-= Край на валидацията=-=-=-=-=--=-=--=--=-=--=-=-=--=\\
 
 ?>

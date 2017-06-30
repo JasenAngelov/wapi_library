@@ -261,9 +261,9 @@ function refreshLibrary(offset = 0) {
 	    });	
 	  
 	    request.done(function (response){	        	
-	    	    	    	
+	    	alert(response)	
 	    		var info = $.parseJSON(response)
-	    			    		
+	    		    		
 	    		if (info[0] == 200) {	    			
 	    			inportLibraryFromAJAX(info[1]);
 		    		controlPanel(info[2]); 
@@ -302,7 +302,7 @@ function nextList(offset) {
 	    });	
 	  
 	    request.done(function (response){	        	
-	    	    	    	
+	    	    alert(response)
 	    		var info = $.parseJSON(response)
 	    			    		
 	    		if (info[0] == 200) {	    			

@@ -1,4 +1,7 @@
 <?php
+
+/*  Клас за съхранение на книгите на клиента. */
+
 class User_library implements JsonSerializable {
 	private $isbn;
 	private $title;

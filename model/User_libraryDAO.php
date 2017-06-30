@@ -1,4 +1,20 @@
 <?php
+
+/* 
+	Дата обект за извличане на библиотеката на клиента и обработката на заявки по специфично търсене.
+	
+	Функционалност:
+	
+	1. get_user_library - Валидира входните данни и взема до определен брой (6) от книгите на клиента.
+	
+	2. books_by_search - Взема до определен брой (6), които отговарят на посочените изисквания.
+	
+	3. user_books_query - Прави заявка към DB за всички книги на клиента.
+	
+	4. user_serch_query - Прави заявка към DB за специфични книги на клиента.
+	
+ */
+
 class User_libraryDAO {
 	private $db;
 	
@@ -18,6 +34,7 @@ class User_libraryDAO {
 	}
 	
 	public function get_user_library($user_id, $offset = 0) {
+		
 		$offset_num = (($offset + 0) * 6);
 		$books = $this->user_books_query ( $user_id, $offset_num, self::GET_ENTIRE_USER_LIBRARY_SQL );
 		
@@ -26,7 +43,7 @@ class User_libraryDAO {
 				$user_book = new User_library ( $book );
 				$result [] = $user_book->jsonSerialize ();
 			}
-			return array($result, $offset_num);
+			return array($result, $offset);
 		} else {
 			return 'Няма намерени резултати!';
 		}

@@ -1,6 +1,8 @@
 <?php
 /*
- * The DB password should be kept in a file on the server. That noted I added the pasword in a file on the prject for more convinience!
+ * 		Обект с архитектура "Сингълтън". 
+ * 		Използваме го за създаване на връзка с базата данни.
+ * 
  */
 class DBConnection {
 	private static $db = null;
@@ -11,7 +13,7 @@ class DBConnection {
 		if (self::$db === null) {
 			try {
 				
-// 				$pass = trim ( file_get_contents ( 'C:\xampp\htdocs\FinalProject\db__credentials\client-pass.txt' ) );
+// 				$pass = trim ( file_get_contents ( 'C:\xampp\htdocs\db__credentials\client-pass.txt' ) );
 				$pass = '';
 				
 				self::$db = new PDO ( "mysql:host=" . self::DB_HOST . ";dbname=" . self::DB_NAME, self::DB_USER, $pass );
