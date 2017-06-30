@@ -5,6 +5,7 @@ function __autoload($className) {
 	require_once '../model/' . $className . ".php";
 }
 
+$error = 200;
 try {
 	
 	if (isset ( $_SESSION ['is_loged'] ) && time () - $_SESSION ['is_loged'] < 1200) {
@@ -89,22 +90,43 @@ try {
 						
 						throw new RuntimeException ( 'Failed to move uploaded file.' );
 					}
+					
+					echo json_encode ( array (
+							$error
+					) );
+					
+				} else {
+					$error = 500;
+					echo json_encode ( array (
+							$error 
+					) );
 				}
 				;
 				
 				// =-=--=-=-=-=--==--==-=-=-=-=-=-=-=- END of Moving the uploaded file =--=--=-=--=-==-=-=--=-=-==-=--=\\
 			}
 		} else {
-			echo "Невалидни входни данни!";
+			$error = 422;
+			echo json_encode ( array (
+					$error 
+			) );
 		}
 	} else {
-		echo "Моля влезте в профила си!";
+		$error = 403;
+		echo json_encode ( array (
+				$error 
+		) );
 	}
 } catch ( RuntimeException $e ) {
-	
-	echo $e->getMessage ();
+	$error = 422;
+	echo json_encode ( array (
+			$error 
+	) );
 } catch ( PDOException $e ) {
-	var_dump ( $e );
+	$error = 500;
+	echo json_encode ( array (
+			$error 
+	) );
 }
 
 ?>

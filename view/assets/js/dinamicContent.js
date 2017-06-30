@@ -423,7 +423,20 @@ function failReport(message) {
 
 
 
-
+function succsessReport(message) {
+	$('#container').empty()
+	
+	var divPic = $('<div id="errorDiv">'+'<img id="errorPic" src="./assets/images/website/succsess.png" alt="error"/>'+'</div>')
+		
+		var divPass = $('<div id="errorMsg">'+'<p>'+message+'</p>'+'</div>')			
+			
+		var button = $('<button id="errorButton" name="login_button" type="submit" onclick="goTo(\'logIn\')">Към начална страница</button>')
+	
+	divPic.appendTo('#container')		
+	divPass.appendTo('#container')	
+	button.appendTo('#container')
+		
+}
 
 
 

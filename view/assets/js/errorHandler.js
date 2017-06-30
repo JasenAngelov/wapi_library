@@ -7,10 +7,10 @@ function errorHandler(errorCode) {
 	
 	switch (errorCode) {
 	case 200:
+			goTo('errorLog')
 			message = 'Succsess!'
-		
-			
-		break;
+			succsessReport(message)	
+			break;		
 	case 403:
 			goTo('errorLog')
 			message = 'Моля влезте в профила си!'
@@ -19,24 +19,22 @@ function errorHandler(errorCode) {
 	case 422:
 			goTo('errorLog')
 			message = 'Невалидни входни данни!'
-			failReport(message)
-		
-		break;
-			
+			failReport(message)		
+			break; 			
 	case 500:
 			goTo('errorLog')
 			message = 'Нещо се обърка!'
-			failReport(message)
-	
-	break;
-			
+			failReport(message)	
+			break;			
 	case 401:
 			goTo('errorLog')
 			message = 'Грешно име или парола!'
 			failReport(message)
-
-break;		
-	
-	
+			break;
+	default:
+			goTo('errorLog')
+			message = 'Възникна грешка, моля опитайте по-късно!'
+			failReport(message)
+			break;
 	}
 }
