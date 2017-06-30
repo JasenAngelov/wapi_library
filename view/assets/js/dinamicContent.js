@@ -133,13 +133,13 @@ function controlPanel(userInfo) {
 		$('<h1>Hello '+userInfo.first_name +'!</h1>').appendTo(info);		
 		$('<p>+ Add Book</p>').appendTo(addBook);
 		
-		$('<a class="navigation" onclick="pagination(this)" id="-">&laquo; Previus</a>').appendTo(pagination);		
+		$('<a class="navigation" onclick="pagination(this)" id="prev">&laquo; Previus</a>').appendTo(pagination);		
 		
 			for (var i = 1; i <= userInfo.max_offset; i++) {
 					$('<a class="navigation" onclick="pagination(this)" id="'+i+'">'+ i +'</a>').appendTo(pagination);
 				}
 			
-		$('<a class="navigation" onclick="pagination(this)" id="+">Next &raquo;</a>').appendTo(pagination);
+		$('<a class="navigation" onclick="pagination(this)" id="next">Next &raquo;</a>').appendTo(pagination);
 		
 	
 		logo.appendTo(top);		

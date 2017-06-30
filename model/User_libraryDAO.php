@@ -18,7 +18,7 @@ class User_libraryDAO {
 	}
 	
 	public function get_user_library($user_id, $offset = 0) {
-		$offset_num = $offset + 0;
+		$offset_num = (($offset + 0) * 6);
 		$books = $this->user_books_query ( $user_id, $offset_num, self::GET_ENTIRE_USER_LIBRARY_SQL );
 		
 		if (! empty ( $books )) {
@@ -26,7 +26,7 @@ class User_libraryDAO {
 				$user_book = new User_library ( $book );
 				$result [] = $user_book->jsonSerialize ();
 			}
-			return $result;
+			return array($result, $offset_num);
 		} else {
 			return 'Няма намерени резултати!';
 		}

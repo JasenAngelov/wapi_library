@@ -247,10 +247,11 @@ function search(event) {
 }
 
 
-function refreshLibrary() {	
+function refreshLibrary(offset = 0) {	
 	
 	 var serializedData = {
-			 refresh : true,	    		
+			 refresh : true,
+			 offset : offset
 	    }
 	 
 	 request = $.ajax({
@@ -260,16 +261,54 @@ function refreshLibrary() {
 	    });	
 	  
 	    request.done(function (response){	        	
-	    	
-	    	
+	    	    	    	
 	    		var info = $.parseJSON(response)
-	    		if (info[0] == 200) {
-	    			
+	    			    		
+	    		if (info[0] == 200) {	    			
 	    			inportLibraryFromAJAX(info[1]);
 		    		controlPanel(info[2]); 
-				
-	    		}else{
-					
+		    						
+	    		}else{					
+					errorHandler(info[0])
+				}	    		
+	    		
+	    			    		
+	    			       
+	    });
+	    
+	   
+	    request.fail(function (jqXHR, textStatus, errorThrown){
+	        
+	        console.error(
+	            "The following error occurred: "+
+	            textStatus, errorThrown
+	        );
+	    });
+	
+}
+
+
+function nextList(offset) {	
+	
+	 var serializedData = {
+			 refresh : true,
+			 offset : offset
+	    }
+	 
+	 request = $.ajax({
+	        url: "../controller/logIn_controller.php",
+	        type: "post",
+	        data: serializedData
+	    });	
+	  
+	    request.done(function (response){	        	
+	    	    	    	
+	    		var info = $.parseJSON(response)
+	    			    		
+	    		if (info[0] == 200) {	    			
+	    			inportSearchLibraryFromAJAX(info[1]);
+		    						
+	    		}else{					
 					errorHandler(info[0])
 				}	    		
 	    		
