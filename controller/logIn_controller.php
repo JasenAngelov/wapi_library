@@ -5,18 +5,26 @@ function __autoload($className) {
 	require_once '../model/' . $className . ".php";
 }
 
+$error = 200;
+
 if ( isset ( $_POST ['refresh'])) {	
 	
 	if (isset ( $_SESSION ['is_loged'] ) && time () - $_SESSION ['is_loged'] < 1200) {
 		
 		$_SESSION ['is_loged'] = time ();
-		
+				
 		echo json_encode ( array (
+				$error,
 				$_SESSION ['user_library'],
-				$_SESSION ['User_info'] 
+				$_SESSION ['User_info']
 		) );
 		
 		die ();
+	}else {
+		$error = 403;
+		echo json_encode ( array (
+				$error				
+		) );
 	}
 }
 
@@ -36,6 +44,9 @@ if (isset ( $_POST ['login_submission'] )) {
 			
 			$dao = new LoginDAO ();
 			$user_account = $dao->request_info ( $user_email, $user_pass );
+			if (!$user_account) {
+				;
+			}
 			$_SESSION ['is_loged'] = time ();
 			$_SESSION ['User_info'] = $user_account;
 			
@@ -49,24 +60,36 @@ if (isset ( $_POST ['login_submission'] )) {
 			$_SESSION ['user_library'] = $user_library;
 			
 			echo json_encode ( array (
+					$error,
 					$_SESSION ['user_library'],
 					$_SESSION ['User_info'] 
 			) );
 			
 			// -=-=-=-=-=-=-=--==-=-=-=-=-=-= END of Retrieving client LIBRARY information =-=-=-=-=-=-=-=-=--=-=--=--=-=---=\\
-		} catch ( PDOException $e ) {
-			echo $e->getMessage ();
-		} catch ( AutorizationException $e ) {
+		} catch ( PDOException $e ) {			
+			$error = 500;
+			echo json_encode ( array (
+					$error
+			) );
 			
-			echo $e->getMessage () . var_dump ( $_POST );
+		} catch ( AutorizationException $e ) {			
+			$error = 401;
+			echo json_encode ( array (
+					$error
+			) );
 		}
 	} else {
-		// напиши какво ще стане ако не са въвели парола или мейл!!!!!!!!!!!
-		echo "Невалидни входни данни!";
+		$error = 422;
+		echo json_encode ( array (
+				$error
+		) );
 	}
 } else {
-	// Izprati 404 page i iztrii sesiqta
-	echo "Моля влезте в профила си!";
+	
+	$error = 422;
+	echo json_encode ( array (
+			$error			
+	) );
 }
 // -=-=-=-=-=-=-=--==-=-=-=-=-=-= END of submith control validation =-=-=-=-=--=-=--=--=-=--=-=-=--=\\
 

@@ -28,19 +28,19 @@ function logInAJAX(){
     });
 
     
-    request.done(function (response){
-    	  
-		
+    request.done(function (response){		
     	
     		var info = $.parseJSON(response)    		
-    		  		
-    		inportLibraryFromAJAX(info[0]);
-    		controlPanel(info[1]);
     		
-    		url = window.location.hash = 'My-library';
+    		if (info[0] == 200) {	    			
+	    			inportLibraryFromAJAX(info[1]);
+		    		controlPanel(info[2]); 
+		    		url = window.location.hash = 'My-library';
+				
+	    		}else{					
+					errorHandler(info[0])
+				}			
     		
- 			
-       
     });
     
    
@@ -220,12 +220,16 @@ function search(event) {
 
     	  
     	    request.done(function (response){
-    	      
-    	    	 console.log(response)
-  	    	
- 	    		var info = $.parseJSON(response)   	    		
+    	        	    	
+ 	    		var info = $.parseJSON(response) 
+ 	    		
+ 	    		if (info[0] == 200) { 	 	    			
+ 	    			inportSearchLibraryFromAJAX(info[1]); 
+				}else{					
+					errorHandler(info[0])
+				}
    	    		  		
-   	    		inportSearchLibraryFromAJAX(info[0]);   	    		
+   	    		  	    		
    	    		  	    		
     	       
     	    });
@@ -240,6 +244,48 @@ function search(event) {
     	    });
 
     }
+}
+
+
+function refreshLibrary() {	
+	
+	 var serializedData = {
+			 refresh : true,	    		
+	    }
+	 
+	 request = $.ajax({
+	        url: "../controller/logIn_controller.php",
+	        type: "post",
+	        data: serializedData
+	    });	
+	  
+	    request.done(function (response){	        	
+	    	
+	    	
+	    		var info = $.parseJSON(response)
+	    		if (info[0] == 200) {
+	    			
+	    			inportLibraryFromAJAX(info[1]);
+		    		controlPanel(info[2]); 
+				
+	    		}else{
+					
+					errorHandler(info[0])
+				}	    		
+	    		
+	    			    		
+	    			       
+	    });
+	    
+	   
+	    request.fail(function (jqXHR, textStatus, errorThrown){
+	        
+	        console.error(
+	            "The following error occurred: "+
+	            textStatus, errorThrown
+	        );
+	    });
+	
 }
 
 

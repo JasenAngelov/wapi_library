@@ -11,7 +11,7 @@ function chekingURL() {
 		case '#My-library':
 			
 			if ($( "#form-1" ).length == 0) {
-				myLibrary();				
+				refreshLibrary();				
 			}						
 			break;
 		
@@ -35,7 +35,11 @@ function chekingURL() {
 			    event.preventDefault();
 			});
 			
-			break;			
+			break;	
+			
+		default :
+				
+			break;
 		}
 	}
 }

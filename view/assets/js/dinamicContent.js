@@ -284,11 +284,11 @@ function inportSearchLibraryFromAJAX(response, offset = 0) {
 		book.appendTo(bookCont);
 		describtion.appendTo(bookCont);	
 		if (i < 3) {
-			bookCont.hide();
-			bookCont.appendTo(books1).show('slow');
+			
+			bookCont.appendTo(books1)
 		}else {
-			bookCont.hide();
-			bookCont.appendTo(books2).show('slow');
+			
+			bookCont.appendTo(books2)
 		}	
 		
 		books1.appendTo(container)
@@ -404,7 +404,20 @@ function LogInMenu() {
 
 
 
-
+function failReport(message) {
+	$('#container').empty()
+	
+	var divPic = $('<div id="errorDiv">'+'<img id="errorPic" src="./assets/images/website/error.png" alt="error"/>'+'</div>')
+		
+		var divPass = $('<div id="errorMsg">'+'<p>'+message+'</p>'+'</div>')			
+			
+		var button = $('<button id="errorButton" name="login_button" type="submit" onclick="goTo(\'logIn\')">Към начална страница</button>')
+	
+	divPic.appendTo('#container')		
+	divPass.appendTo('#container')	
+	button.appendTo('#container')
+		
+}
 
 
 
