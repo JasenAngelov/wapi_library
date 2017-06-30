@@ -50,6 +50,24 @@ body {
 	background-color: #ddd;
 	border-radius: 5px;
 }
+#creation{
+	text-decoration: underline;
+}
+
+#creation:HOVER{
+	color: navy;
+	cursor: pointer;
+}
+
+.login-form {
+	margin-top: 15%;
+}
+
+.navigation:HOVER {
+	color: blue;
+	cursor: pointer;
+}
+
 
 form {
 	max-width: auto;
@@ -116,7 +134,7 @@ h1 {
 }
 
 #container {
-	padding-top: 10%;
+	
 }
 
 input[type="text"], input[type="password"], input[type="date"], input[type="datetime"],
@@ -234,8 +252,7 @@ label.light {
 
 
 .container {	
-	margin-left: 30%;
-	margin-top: 5%;
+	margin-left: 30%;	
 	width: 620px;
 	max-height: 900px;
 	padding: 30px 30px;

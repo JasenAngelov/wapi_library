@@ -133,13 +133,13 @@ function controlPanel(userInfo) {
 		$('<h1>Hello '+userInfo.first_name +'!</h1>').appendTo(info);		
 		$('<p>+ Add Book</p>').appendTo(addBook);
 		
-		$('<a  onclick="pagination(this)" id="-">&laquo; Previus</a>').appendTo(pagination);		
+		$('<a class="navigation" onclick="pagination(this)" id="-">&laquo; Previus</a>').appendTo(pagination);		
 		
 			for (var i = 1; i <= userInfo.max_offset; i++) {
-					$('<a  onclick="pagination(this)" id="'+i+'">'+ i +'</a>').appendTo(pagination);
+					$('<a class="navigation" onclick="pagination(this)" id="'+i+'">'+ i +'</a>').appendTo(pagination);
 				}
 			
-		$('<a  onclick="pagination(this)" id="+">Next &raquo;</a>').appendTo(pagination);
+		$('<a class="navigation" onclick="pagination(this)" id="+">Next &raquo;</a>').appendTo(pagination);
 		
 	
 		logo.appendTo(top);		
@@ -182,7 +182,7 @@ function controlPanel(userInfo) {
 function inportLibraryFromAJAX(response, offset = 0) {
 	$( "#container" ).empty()	
 	
-	var container = $('<form id="form-1" class="login-form" action="#"></form>');
+	var container = $('<form id="form-1" action="#"></form>');
 	var books1 = $('<div class="books1" ></div>');	
 	var books2 = $('<div class="books2" ></div>');
 	
@@ -290,15 +290,16 @@ function inportSearchLibraryFromAJAX(response, offset = 0) {
 			bookCont.hide();
 			bookCont.appendTo(books2).show('slow');
 		}	
-		books1.hide();
-		books1.appendTo(container).show('slow');
-		books2.hide();
-		books2.appendTo(container).show('slow');
+		
+		books1.appendTo(container)
+		
+		books2.appendTo(container)
 		}
 	}else{  
 		var phpResponse = $('<p>'+'<strong>'+response+'</strong>'+'</p>');	 
 		phpResponse.hide();
 		phpResponse.appendTo(container).show('slow');
+		container.css("text-align", "center");
 		
 		
 	}
@@ -321,7 +322,7 @@ function createUserPanel() {
 		var header = $('<h1>Sign Up</h1>')
 		
 		var fieldset = $('<fieldset></fieldset>')			
-			var legend = $('<legend>'+'<span class="number">*</span>Your basic info'+'</legend>')
+			var legend = $('<legend>'+'<span class="number"></span>Your basic info'+'</legend>')
 			
 			var fname_label = $('<label for="name">First name:</label> ')
 			var fname_inp = $('<input type="text" id="fname" name="f_name"> ')

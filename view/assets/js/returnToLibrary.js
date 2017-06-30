@@ -8,10 +8,7 @@ function myLibrary() {
 	        url: "../controller/logIn_controller.php",
 	        type: "post",
 	        data: serializedData
-	    });
-
-	 
-	
+	    });	
 	  
 	    request.done(function (response){	        	
 	    	

@@ -85,9 +85,9 @@ class User_libraryDAO {
 		$pstmt->bindValue ( ':title', $title, PDO::PARAM_STR);
 		$pstmt->bindValue ( ':fname', $fname, PDO::PARAM_STR);
 		$pstmt->bindValue ( ':lname', $lname, PDO::PARAM_STR );
-		$pstmt->bindValue ( ':offset', $offset, PDO::PARAM_STR);
+		$pstmt->bindValue ( ':offset', $offset, PDO::PARAM_INT);
 		$pstmt->bindValue ( ':upId', $userId, PDO::PARAM_STR);
-		$pstmt->execute (array($title, $fname, $lname, $userId));
+		$pstmt->execute ();
 		
 		$books = $pstmt->fetchAll ( PDO::FETCH_ASSOC );
 		return $books;

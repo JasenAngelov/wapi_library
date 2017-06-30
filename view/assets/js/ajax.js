@@ -37,7 +37,7 @@ function logInAJAX(){
     		inportLibraryFromAJAX(info[0]);
     		controlPanel(info[1]);
     		
-//    		url = window.location.hash = 'My-library';
+    		url = window.location.hash = 'My-library';
     		
  			
        
@@ -200,6 +200,46 @@ function createUserAJAX() {
 
     
     
+}
+
+function search(event) {
+	var keyCode = (event.keyCode ? event.keyCode : event.which);   
+   
+	if (keyCode == 13) {
+    	
+    	 var serializedData = {
+    			 	search_submit : true,
+    	    		search_input : $('#search').val()    	    		
+    	    }
+   	    
+    	    request = $.ajax({
+    	        url: "../controller/Search_controller.php",
+    	        type: "post",
+    	        data: serializedData
+    	    });
+
+    	  
+    	    request.done(function (response){
+    	      
+    	    	 console.log(response)
+  	    	
+ 	    		var info = $.parseJSON(response)   	    		
+   	    		  		
+   	    		inportSearchLibraryFromAJAX(info[0]);   	    		
+   	    		  	    		
+    	       
+    	    });
+    	    
+    	   
+    	    request.fail(function (jqXHR, textStatus, errorThrown){
+    	        
+    	        console.error(
+    	            "The following error occurred: "+
+    	            textStatus, errorThrown
+    	        );
+    	    });
+
+    }
 }
 
 

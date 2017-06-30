@@ -10,7 +10,9 @@ function chekingURL() {
 		
 		case '#My-library':
 			
-			myLibrary();			
+			if ($( "#form-1" ).length == 0) {
+				myLibrary();				
+			}						
 			break;
 		
 		case '#add-book':	
