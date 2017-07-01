@@ -46,7 +46,7 @@ if (isset ( $_POST ['refresh'] )) {
 			
 			switch (true) {
 				case is_int ( $input_data + 0 ) :
-					$offset = $input_data ;
+					$offset = $input_data - 1;
 					break;
 				case $input_data == 'prev' :
 					$offset = $offset - 1;
@@ -58,12 +58,12 @@ if (isset ( $_POST ['refresh'] )) {
 			}
 			
 			if ($offset < 0 || $offset > $user_account->max_offset) {
-				$offset = $_SESSION ['offset'];
+				$offset = $_SESSION ['offset'];				
 			}
 						
 			// -=-=-=-=-=-=-=--==-=-=-=-=-=-= Край на валидирането и санитизирането на данните от пагинацията =-=-=-=-=--=-=--=--=-=--=-=-=--=\\
 		}
-			
+		
 		// -=-=-=-=-=-=-=--==-=-=-=-=-=-= Опресняване на библиотеката на клиента =-=-=-=-=--=-=--=--=-=--=-=-=--=\\
 		$dao = new User_libraryDAO ();
 		$result = $dao->get_user_library ( $user_account->user_id, $offset );		

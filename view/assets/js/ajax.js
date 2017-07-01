@@ -135,14 +135,20 @@ function addBookAJAX (){
   
     request.done(function (response){
           
-    		
+    	var info = $.parseJSON(response) 
+ 		
+ 		if (info[0] == 200) { 	
+ 			
+ 			alert('Успешно добавихте нова книга!')
+ 			
+ 			inportSearchLibraryFromAJAX(info[1]); 
+ 			controlPanel(info[2]);
+		}else{					
+			errorHandler(info[0])
+		}	  	
     	
-    	console.log(response)
-  	
-//		inportLibraryFromAJAX(info[1]);
-//   		controlPanel(info[0]);
-//		
-//		document.location.hash = "/My-library";
+
+
        
     });
     
@@ -198,8 +204,9 @@ function createUserAJAX() {
     
     request.done(function (response){
     	
-    	alert(response)
-		       
+    	var info = $.parseJSON(response)     	
+    	errorHandler(info[0])
+    			       
     });
     
    
@@ -280,7 +287,7 @@ function refreshLibrary(offset = 0) {
 	    });	
 	  
 	    request.done(function (response){	        	
-	    	alert(response)	
+	    	
 	    		var info = $.parseJSON(response)
 	    		    		
 	    		if (info[0] == 200) {	    			
@@ -321,7 +328,7 @@ function nextList(offset) {
 	    });	
 	  
 	    request.done(function (response){	        	
-	    	    alert(response)
+	    	    
 	    		var info = $.parseJSON(response)
 	    			    		
 	    		if (info[0] == 200) {	    			
