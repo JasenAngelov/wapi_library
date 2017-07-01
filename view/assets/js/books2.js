@@ -1,3 +1,15 @@
+
+/*
+ * 
+ * 		Функции за анимиране на библиотеката на клиента.
+ *
+ */
+
+
+
+
+
+
 var Books = (function() {
 
 	var transEndEventNames = {

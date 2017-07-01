@@ -1,3 +1,21 @@
+/*
+ * 	JS Функции за извършването на AJAX заявки. 
+ * 	
+ * 	Функционалност:
+ * 	
+ * 		1. logInAJAX() - Функция за изпращане на заявка за първоначално вписване на клиент.
+ * 
+ * 		2. addBookAJAX() - Функция за изпращане на заявка за добавяне на нова книга в библиотеката на клиента.
+ * 
+ * 		3. createUserAJAX() - Функция за изпращане на заявка за създаване на нов клиент.
+ * 
+ * 		4. search() - Функция за изпращане на заявка за търсене по критерии.
+ * 
+ * 		5. refreshLibrary() - Функция за изпращане на заявка за обновяване на библиотеката (сесията).
+ * 
+ * 		6. nextList() - Функция за изпращане на заявка за различна страница от библиотеката (пагинацията). 
+ * 
+ */
 
 //=--=-=-=-=-=--=-=--=-=-=-=-==-=-=-=-=-=-=-==-=- AJAX request for logIn =-=--=-=-=-=-=--=-=-=-=-=-=-==-=-=-=---=-=-\\
 
@@ -15,7 +33,7 @@ function logInAJAX(){
     		login_submission : true,
     		user_email : $('#username').val(),
     		user_pass : $('#password_login').val()
-    }
+    	}
 
     
     $inputs.prop("disabled", true);
@@ -25,7 +43,7 @@ function logInAJAX(){
         url: "../controller/logIn_controller.php",
         type: "post",
         data: serializedData
-    });
+    	});
 
     
     request.done(function (response){		
@@ -39,9 +57,9 @@ function logInAJAX(){
 				
 	    		}else{					
 					errorHandler(info[0])
-				}			
+					}			
     		
-    });
+    	});
     
    
     request.fail(function (jqXHR, textStatus, errorThrown){
@@ -49,14 +67,15 @@ function logInAJAX(){
         console.error(
             "The following error occurred: "+
             textStatus, errorThrown
-        );
-    });
+        	);
+    	});
 
   
     request.always(function () {
         
         $inputs.prop("disabled", false);
-    });
+        
+    	});
 
 };
 
