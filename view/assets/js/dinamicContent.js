@@ -40,34 +40,34 @@ function addNewBook() {
 			
 			var leftCont = $('<div class="leftCont" ></div>');
 						
-				var titleField = $('<label for="bookTitle" class="rowTitle">Title: </label>'+'<input type="text" name="bookTitle" placeholder="Book title" id="bookTitle">');			
+				var titleField = $('<label for="bookTitle" class="rowTitle">Title: </label>'+'<input type="text" class="form-field" name="bookTitle" placeholder="Book title" id="bookTitle" tabindex="1">');			
 			
-				var fnameField = $('<label for="firstName" class="rowTitle">First name: </label>'+ '<input type="text" name="firstName" placeholder="First name.." id="firstName">');			
+				var fnameField = $('<label for="firstName" class="rowTitle">First name: </label>'+ '<input type="text" class="form-field" name="firstName" placeholder="First name.." id="firstName" tabindex="3">');			
 					
-				var pagesField = $('<label for="pages" class="rowTitle">Number of pages: </label>'+ '<input type="number" name="pages" placeholder="number of pages" id="pages">');			
+				var pagesField = $('<label for="pages" class="rowTitle">Number of pages: </label>'+ '<input type="number" class="form-field" name="pages" placeholder="number of pages" id="pages" tabindex="5">');			
 		
-				var coverFile = $('<label for="cover" class="rowTitle">Cover photo: </label>'+ '<input type="file" name="cover" id="cover" class="inputfile" onchange="checkFile(this)">');
+				var coverFile = $('<label for="cover" class="rowTitle">Cover photo: </label>'+ '<input type="file" name="cover" id="cover" class="inputfile" onchange="checkFile(this)" tabindex="7">');
 				
 			var rightCont = $('<div class="rightCont" ></div>');
 				
-				var isbnField = $('<label for="isbn" class="rowTitle">ISBN number: </label>'+ '<input type="number" name="isbn" placeholder="8-13 digit code" id="isbn">');			
+				var isbnField = $('<label for="isbn" class="rowTitle">ISBN number: </label>'+ '<input type="number" class="form-field" name="isbn" placeholder="10 digit code" id="isbn" onblur ="checkISBN()" tabindex="2">');			
 				
-				var lnameField = $('<label for="lastName" class="rowTitle">Last name: </label>'+'<input type="text" name="lastName" placeholder="Last name.." id="lastName">');
+				var lnameField = $('<label for="lastName" class="rowTitle">Last name: </label>'+'<input type="text" class="form-field" name="lastName" placeholder="Last name.." id="lastName" tabindex="4">');
 				
-				var dateField = $('<label for="pubDate" class="rowTitle">Publishing date: </label>'+'<input type="text" name="pubDate" placeholder="1992-03-01" id="pubDate">');
+				var dateField = $('<label for="pubDate" class="rowTitle">Publishing date: </label>'+'<input type="text" class="form-field" name="pubDate" placeholder="1992-03-01" id="pubDate" onblur="checkDate()" tabindex="6">');
 				
-				var bookFile = $('<label for="bookFile" class="rowTitle" >Book file: </label>'+ '<input type="file" name="bookFile" id="bookFile" class="inputfile" onchange="checkFile(this)">');
+				var bookFile = $('<label for="bookFile" class="rowTitle" >Book file: </label>'+ '<input type="file" name="bookFile" id="bookFile" class="inputfile" onchange="checkFile(this)" tabindex="8">');
 				
 				
 			
-			var descriptionField = $('<p class="bookDesc">Book description: '+'<p>'+ '<textarea name="bookDesc" id="bookDesc" cols="30" rows="20" placeholder="Book description.."></textarea>' +'</p>'+'</p>');
+			var descriptionField = $('<p class="bookDesc">Book description: '+'<p>'+ '<textarea name="bookDesc" class="form-field" id="bookDesc" cols="30" rows="20" placeholder="Book description.." tabindex="9"></textarea>' +'</p>'+'</p>');
 			
 			
 			
 		var bottom = $('<div class="bottom" ></div>');
 			
-			var back = $('<button id="backBut" class="button" onclick="goTo(\'My-library\')">Back</button>');
-			var subbmith = $('<button id="subBut" class="button" onclick="addBookAJAX()" >Subbmith</button>');
+			var back = $('<button id="backBut" class="button" onclick="goTo(\'My-library\')" tabindex="11">Back</button>');
+			var subbmith = $('<button id="subBut" class="button" onclick="addBookAJAX()" tabindex="10">Subbmith</button>');
 	
 			// =-=-=--=-=-=-=--=--==-=-=--=--=-= END of Creating the necessary DOM elements =-=-=-=--=-==--=-=-=-=-=--=--=-=-=-=\\
 	
@@ -346,19 +346,19 @@ function createUserPanel() {
 			var legend = $('<legend>'+'<span class="number"></span>Your basic info'+'</legend>')
 			
 			var fname_label = $('<label for="name">First name:</label> ')
-			var fname_inp = $('<input type="text" id="fname" name="f_name"> ')
+			var fname_inp = $('<input class="form-field" type="text" id="fname" name="f_name"> ')
 			
 			var lname_label = $('<label for="name">Last name:</label> ')
-			var lname_inp = $('<input type="text" id="lname" name="l_name"> ')
+			var lname_inp = $('<input class="form-field" type="text" id="lname" name="l_name"> ')
 			
 			var email_label = $('<label for="name">E-mail:</label> ')
-			var email_inp = $('<input type="text" id="email" name="email"> ')
+			var email_inp = $('<input class="form-field" type="text" id="email" name="email" onblur="emailCheck(this)> ')
 			
 			var pass_label = $('<label for="name">Password:</label> ')
-			var pass_inp = $('<input type="password" id="pass" name="pass"> ')
+			var pass_inp = $('<input class="form-field" type="password" id="pass" name="pass"> ')
 			
 			var rePass_label = $('<label for="name">Repeate password:</label> ')
-			var rePass_inp = $('<input type="password" id="rePass" name="rePass"> ')
+			var rePass_inp = $('<input class="form-field" type="password" id="rePass" name="rePass" onblur="checkPass()> ')
 			
 		var back = $('<button id="backBut" class="button" onclick="goTo(\'logIn\')">Back</button>');
 		var subbmith = $('<button id="subBut" class="button" onclick="createUserAJAX()" >Subbmith</button>');
@@ -400,9 +400,9 @@ function LogInMenu() {
 	//=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-= Creating elements =-=-=-=-=-=-=--=-=-=-=-==-=-=\\
 	
 	var form = $('<form id="form-1" class="login-form" enctype="multipart/form-data"></form>')
-		var divEmail = $('<div id="email_login">'+'<input id="username" type="text" placeholder="username" value="123"  onblur="fieldCheck(this)"/>'+'</div>')
+		var divEmail = $('<div id="email_login">'+'<input class="form-field" id="username" type="text" placeholder="username" onblur="emailCheck(this)"/>'+'</div>')
 		
-		var divPass = $('<div id="pass_login">'+'<input id="password_login" type="password" placeholder="password" value="123" />'+'</div>')			
+		var divPass = $('<div id="pass_login">'+'<input class="form-field" id="password_login" type="password" placeholder="password" />'+'</div>')			
 			
 		var button = $('<button id="login_button" name="login_button" type="submit" onclick="logInAJAX()">login</button>')
 			

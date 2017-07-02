@@ -13,6 +13,7 @@ function chekingURL() {
 	
 	if (window.location.hash == '') {
 		url = window.location.hash = 'logIn';
+		document.title = 'LogIn';
 	}else{
 		switch (window.location.hash) {
 		
@@ -20,12 +21,14 @@ function chekingURL() {
 			
 			if ($( "#form-1" ).length == 0) {
 				refreshLibrary();				
-			}						
+			}
+			document.title = 'My Library';
 			break;
 		
 		case '#add-book':	
 			
 			addNewBook();
+			document.title = 'Add Book';
 			break;
 			
 		case '#signUp':				
@@ -34,7 +37,7 @@ function chekingURL() {
 			$('#backBut').click(function(event){
 			    event.preventDefault();
 			});
-			
+			document.title = 'SignUp';			
 			break;
 			
 		case '#logIn':				
@@ -42,7 +45,7 @@ function chekingURL() {
 			$('#login_button').click(function(event){
 			    event.preventDefault();
 			});
-			
+			document.title = 'LogIn';
 			break;	
 			
 		default :
