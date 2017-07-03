@@ -352,13 +352,13 @@ function createUserPanel() {
 			var lname_inp = $('<input class="form-field" type="text" id="lname" name="l_name"> ')
 			
 			var email_label = $('<label for="name">E-mail:</label> ')
-			var email_inp = $('<input class="form-field" type="text" id="email" name="email" onblur="emailCheck(this)> ')
+			var email_inp = $('<input class="form-field" type="text" id="email" name="email" onblur="emailCheck(this)"> ')
 			
 			var pass_label = $('<label for="name">Password:</label> ')
 			var pass_inp = $('<input class="form-field" type="password" id="pass" name="pass"> ')
 			
 			var rePass_label = $('<label for="name">Repeate password:</label> ')
-			var rePass_inp = $('<input class="form-field" type="password" id="rePass" name="rePass" onblur="checkPass()> ')
+			var rePass_inp = $('<input class="form-field" type="password" id="rePass" name="rePass" onblur="checkPass()"> ')
 			
 		var back = $('<button id="backBut" class="button" onclick="goTo(\'logIn\')">Back</button>');
 		var subbmith = $('<button id="subBut" class="button" onclick="createUserAJAX()" >Subbmith</button>');
